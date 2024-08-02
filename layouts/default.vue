@@ -1,6 +1,6 @@
 <template>
   <main class="min-h-screen">
-    <AppHeader />
+    <app-header />
     <slot />
   </main>
 </template>
