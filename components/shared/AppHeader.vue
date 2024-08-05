@@ -21,7 +21,7 @@
         <div>
           <Button class="group relative">
             <b>520р</b>
-            <span class="mx-3 h-full w-[1px] bg-white/30"></span>
+            <span class="mx-3 h-full w-[1px] bg-white/30" />
             <div
               class="duaration-300 flex items-center gap-1 transition group-hover:opacity-0"
             >

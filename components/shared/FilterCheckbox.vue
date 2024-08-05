@@ -1,11 +1,10 @@
 <template>
   <div class="flex items-center space-x-2">
     <Checkbox
-      :value="props.value"
       :id="`checkbox-${props.name}-${props.value}`"
+      v-model:checked="checked"
+      :value="props.value"
       :name="props.name"
-      :checked="props.checked"
-      @update:checked="handleChange"
       class="h-6 w-6 rounded-[8px]"
     />
     <label
@@ -18,23 +17,10 @@
 </template>
 
 <script setup lang="ts">
-import type { FilterCheckboxProps } from "~/types/typeCheckbox";
 import { defineProps } from "vue";
+import type { FilterCheckboxProps } from "~/types/typeCheckbox";
 
 const props = defineProps<FilterCheckboxProps>();
-const emit = defineEmits(["update:checked"]);
 
-const check = ref(props.checked);
-
-watch(
-  () => props.checked,
-  (newVal) => {
-    check.value = newVal;
-  },
-);
-
-const handleChange = (newChecked: boolean) => {
-  check.value = newChecked;
-  emit("update:checked", newChecked);
-};
+const checked = defineModel<boolean>("checked");
 </script>

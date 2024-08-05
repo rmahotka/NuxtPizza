@@ -7,8 +7,6 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from "vue";
-
 type TitleSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
 interface Props {

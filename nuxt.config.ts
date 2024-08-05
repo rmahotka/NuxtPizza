@@ -1,37 +1,49 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2024-04-03",
+  compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   app: {
     head: {
-      title: "NuxtPizza",
+      title: 'NuxtPizza',
     },
   },
   components: {
     dirs: [
       {
-        path: "~/components",
+        path: '~/components',
         pathPrefix: false,
         global: true,
       },
       {
-        path: "~/components/shared",
+        path: '~/components/shared',
         pathPrefix: false,
-        prefix: "shared",
+        prefix: 'shared',
         global: true,
       },
     ],
   },
-  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@nuxtjs/google-fonts"],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'shadcn-nuxt',
+    '@nuxtjs/google-fonts',
+    '@nuxt/eslint',
+  ],
   shadcn: {
-    prefix: "",
-    componentDir: "./components/ui",
+    prefix: '',
+    componentDir: './components/ui',
   },
   googleFonts: {
     families: {
       Nunito: {
-        wght: "400..900",
+        wght: '400..900',
       },
     },
   },
-});
+    typescript: {
+    tsConfig: {
+      compilerOptions: {
+        moduleResolution: "node"
+      },
+    },
+  },
+})

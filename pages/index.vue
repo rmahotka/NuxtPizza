@@ -16,7 +16,9 @@
         <div class="w-[250px]">
           <Filter />
         </div>
-        <div class="flex-1">Список товаров</div>
+        <div class="flex-1">
+          <products-list-card />
+        </div>
       </div>
     </app-container>
   </section>
