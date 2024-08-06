@@ -56,7 +56,7 @@
                 items: [{ price: 550 }],
               },
             ]"
-            :categoriId="1"
+            :categori-id="1"
           />
         </div>
       </div>
