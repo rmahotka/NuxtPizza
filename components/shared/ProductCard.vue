@@ -34,8 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ItemsPizzaProps } from "~/types/typeItemPizza";
+import type { ItemPizzaProps } from "~/types/typeItemPizza";
 import { Plus } from "lucide-vue-next";
 
-const props = defineProps<ItemsPizzaProps>();
+const props = defineProps<ItemPizzaProps>();
 </script>

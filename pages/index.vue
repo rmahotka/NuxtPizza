@@ -12,12 +12,52 @@
     </div>
 
     <app-container class="mt-10 pb-14">
-      <div class="flex gap-12">
+      <div class="flex gap-[80px]">
         <div class="w-[250px]">
           <Filter />
         </div>
         <div class="flex-1">
-          <products-list-card />
+          <products-list-card
+            title="Пиццы"
+            :items="[
+              {
+                id: 1,
+                name: 'Чизбургер-пицца',
+                imageUrl: '',
+                price: 550,
+                items: [{ price: 550 }],
+              },
+              {
+                id: 1,
+                name: 'Чизбургер-пицца',
+                imageUrl: '',
+                price: 550,
+                items: [{ price: 550 }],
+              },
+              {
+                id: 1,
+                name: 'Чизбургер-пицца',
+                imageUrl: '',
+                price: 550,
+                items: [{ price: 550 }],
+              },
+              {
+                id: 1,
+                name: 'Чизбургер-пицца',
+                imageUrl: '',
+                price: 550,
+                items: [{ price: 550 }],
+              },
+              {
+                id: 1,
+                name: 'Чизбургер-пицца',
+                imageUrl: '',
+                price: 550,
+                items: [{ price: 550 }],
+              },
+            ]"
+            :categoriId="1"
+          />
         </div>
       </div>
     </app-container>
