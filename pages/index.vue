@@ -17,47 +17,90 @@
           <Filter />
         </div>
         <div class="flex-1">
-          <products-list-card
-            title="Пиццы"
-            :items="[
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: '',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: '',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: '',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: '',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-              {
-                id: 1,
-                name: 'Чизбургер-пицца',
-                imageUrl: '',
-                price: 550,
-                items: [{ price: 550 }],
-              },
-            ]"
-            :categori-id="1"
-          />
+          <div class="flex flex-col gap-16">
+            <products-list-card
+              title="Пиццы"
+              :categori-id="1"
+              :items="[
+                {
+                  id: 1,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 2,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 3,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 4,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 5,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+              ]"
+            />
+            <products-list-card
+              title="Комбо"
+              :categori-id="2"
+              :items="[
+                {
+                  id: 1,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 2,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 3,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 4,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+                {
+                  id: 5,
+                  name: 'Чизбургер-пицца',
+                  imageUrl: '',
+                  price: 550,
+                  items: [{ price: 550 }],
+                },
+              ]"
+            />
+          </div>
         </div>
       </div>
     </app-container>

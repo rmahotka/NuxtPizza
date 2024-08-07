@@ -27,6 +27,8 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@nuxtjs/google-fonts',
     '@nuxt/eslint',
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
   ],
   shadcn: {
     prefix: '',
@@ -38,6 +40,9 @@ export default defineNuxtConfig({
         wght: '400..900',
       },
     },
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
   },
     typescript: {
     tsConfig: {
