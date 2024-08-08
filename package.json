@@ -15,6 +15,7 @@
     "@nuxt/eslint": "^0.5.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@pinia/nuxt": "^0.5.3",
+    "@prisma/nuxt": "^0.0.35",
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
     "class-variance-authority": "^0.7.0",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@prisma/client": "^5.18.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
     "prettier": "^3.3.3",

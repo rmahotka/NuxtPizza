@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@vueuse/nuxt',
     '@pinia/nuxt',
+    '@prisma/nuxt',
   ],
   shadcn: {
     prefix: '',
