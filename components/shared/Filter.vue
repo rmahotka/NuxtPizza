@@ -1,191 +1,176 @@
 <template>
   <div>
     <app-title class="mb-5 font-bold"> Фильтрация </app-title>
-    <div class="flex flex-col gap-4">
-      <filter-checkbox
-        v-model:checked="checkedCollect"
-        value="1"
-        name="type"
-        text="Можно собирать"
-      />
-      <filter-checkbox
-        v-model:checked="checkedNew"
-        value="2"
-        name="type"
-        text="Новинки"
-      />
-    </div>
 
-    <div class="mt-3 border-y border-y-neutral-100 py-6 pb-7">
+    <checkbox-filter-group
+      class="mt-6 border-b border-y-neutral-100 pb-5"
+      title="Тип теста"
+      name-group="typePizza"
+      :loading="loadingItem"
+      :items="typePizza"
+      :limit="typePizza.length"
+      :checked-items="Array.from(selectedType)"
+      @update:checked-items="updateSelectType"
+    />
+
+    <checkbox-filter-group
+      title="Размер"
+      name-group="size"
+      :loading="loadingItem"
+      :items="sizePizza"
+      :limit="sizePizza.length"
+      :checked-items="Array.from(selectedSize)"
+      @update:checked-items="updateSelectSize"
+    />
+
+    <div class="mt-3 border-y border-y-neutral-100 py-5 pb-6">
       <p class="mb-3 font-bold">Цена от и до:</p>
       <div class="mb-5 flex gap-3">
         <Input
+          v-model="priceRange.priceFrom"
           type="number"
           placeholder="0"
           min="0"
           max="1000"
           :default-value="100"
         />
-        <Input type="number" placeholder="5000" min="100" max="5000" />
-      </div>
-      <range-slider v-model="modelValue" :min="0" :max="5000" :step="10" />
-    </div>
-
-    <div class="mb-10 mt-8">
-      <p class="mb-3 font-bold">Ингредиенты:</p>
-      <checkbox-filter-group name-group="ingredients" :items="items" />
-    </div>
-
-    <div>
-      <p class="mb-3 font-bold">Тип теста:</p>
-      <div class="flex flex-col gap-4">
-        <filter-checkbox
-          v-model:checked="checkedtypeDoughtTraditional"
-          value="1"
-          name="typeDough"
-          text="Традиционное"
-        />
-        <filter-checkbox
-          v-model:checked="checkedtypeDoughtThin"
-          value="2"
-          name="typeDough"
-          text="Тонкое"
+        <Input
+          v-model="priceRange.priceTo"
+          type="number"
+          placeholder="1000"
+          min="100"
+          max="1000"
         />
       </div>
+      <range-slider v-model="rangeValue" :min="0" :max="1000" :step="10" />
     </div>
+
+    <checkbox-filter-group
+      title="Ингредиенты"
+      name-group="ingredients"
+      :loading="loadingItem"
+      :items="ingredientsList"
+      :checked-items="Array.from(selectedIngredients)"
+      @update:checked-items="updateSelectedItems"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { FilterCheckboxProps } from "~/types/typeCheckbox";
+import type { Ingredients } from "@prisma/client";
+import type {
+  FilterCheckboxProps,
+  TangeProps,
+  SearchParams,
+} from "~/types/typeFilters";
+import { Api } from "~/services/api-client";
+import { useUrlSearchParams } from "@vueuse/core";
+import qs from "qs";
 
-const modelValue = ref([100, 5000]);
+const router = useRouter();
 
-const checkedCollect = ref(true);
-const checkedNew = ref(false);
-const checkedtypeDoughtTraditional = ref(true);
-const checkedtypeDoughtThin = ref(false);
+const paramsQuery = useUrlSearchParams<SearchParams>("history");
 
-const items = ref<FilterCheckboxProps[]>([
-  {
-    text: "Сырный соус",
-    value: "1",
-    checked: true,
+const priceRange = ref<TangeProps>({
+  priceFrom: 0,
+  priceTo: 1000,
+});
+
+const rangeValue = computed({
+  get: () => [priceRange.value.priceFrom, priceRange.value.priceTo],
+  set: ([from, to]: number[]) => {
+    priceRange.value.priceFrom = from;
+    priceRange.value.priceTo = to;
   },
-  {
-    text: "Моццарелла",
-    value: "2",
-    checked: false,
-  },
-  {
-    text: "Чеснок",
-    value: "3",
-    checked: true,
-  },
-  {
-    text: "Соленные огурчики",
-    value: "4",
-    checked: false,
-  },
-  {
-    text: "Красный лук",
-    value: "5",
-    checked: true,
-  },
-  {
-    text: "Томаты",
-    value: "6",
-    checked: false,
-  },
-  {
-    text: "Сырный соус",
-    value: "1",
-    checked: true,
-  },
-  {
-    text: "Моццарелла",
-    value: "2",
-    checked: false,
-  },
-  {
-    text: "Чеснок",
-    value: "3",
-    checked: true,
-  },
-  {
-    text: "Соленные огурчики",
-    value: "4",
-    checked: false,
-  },
-  {
-    text: "Красный лук",
-    value: "5",
-    checked: true,
-  },
-  {
-    text: "Томаты",
-    value: "6",
-    checked: false,
-  },
-  {
-    text: "Сырный соус",
-    value: "1",
-    checked: true,
-  },
-  {
-    text: "Моццарелла",
-    value: "2",
-    checked: false,
-  },
-  {
-    text: "Чеснок",
-    value: "3",
-    checked: true,
-  },
-  {
-    text: "Соленные огурчики",
-    value: "4",
-    checked: false,
-  },
-  {
-    text: "Красный лук",
-    value: "5",
-    checked: true,
-  },
-  {
-    text: "Томаты",
-    value: "6",
-    checked: false,
-  },
-  {
-    text: "Сырный соус",
-    value: "1",
-    checked: true,
-  },
-  {
-    text: "Моццарелла",
-    value: "2",
-    checked: false,
-  },
-  {
-    text: "Чеснок",
-    value: "3",
-    checked: true,
-  },
-  {
-    text: "Соленные огурчики",
-    value: "4",
-    checked: false,
-  },
-  {
-    text: "Красный лук",
-    value: "5",
-    checked: true,
-  },
-  {
-    text: "Томаты",
-    value: "6",
-    checked: false,
-  },
+});
+
+const sizePizza = ref([
+  { text: "20 см", value: "20" },
+  { text: "30 см", value: "30" },
+  { text: "40 см", value: "40" },
 ]);
+
+const typePizza = ref([
+  { text: "Тонкое", value: "1" },
+  { text: "Традиционное", value: "2" },
+]);
+
+const loadingItem = ref<boolean>(false);
+const ingredientsList = ref<FilterCheckboxProps[]>([]);
+
+const selectedSize = ref<Set<string>>(
+  new Set(paramsQuery.sizes ? paramsQuery.sizes.split(",") : []),
+);
+
+const selectedType = ref<Set<string>>(
+  new Set(paramsQuery.pizzaType ? paramsQuery.pizzaType.split(",") : []),
+);
+
+const selectedIngredients = ref<Set<string>>(new Set());
+
+const updateSelectSize = (values: string[]) => {
+  selectedSize.value = new Set(values);
+};
+
+const updateSelectType = (values: string[]) => {
+  selectedType.value = new Set(values);
+};
+
+const updateSelectedItems = (values: string[]) => {
+  selectedIngredients.value = new Set(values);
+};
+
+watch(
+  () => [
+    selectedType.value,
+    selectedSize.value,
+    rangeValue.value,
+    selectedIngredients.value,
+  ],
+  () => {
+    const filters = {
+      pizzaType: Array.from(selectedType.value),
+      sizes: Array.from(selectedSize.value),
+      ...priceRange.value,
+      ingredients: Array.from(selectedIngredients.value),
+    };
+    const query = qs.stringify(filters, {
+      arrayFormat: "comma",
+    });
+
+    router.push(`?${query}`);
+  },
+);
+
+const getIngredients = async () => {
+  try {
+    loadingItem.value = true;
+    const response = await Api.ingredients.gelAll();
+    ingredientsList.value = response.map((ingredient: Ingredients) => ({
+      value: String(ingredient.id),
+      text: ingredient.name,
+    }));
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    loadingItem.value = false;
+  }
+};
+
+onMounted(async () => {
+  await getIngredients();
+
+  priceRange.value.priceFrom = Number(paramsQuery.priceFrom) || 0;
+  priceRange.value.priceTo = Number(paramsQuery.priceTo) || 1000;
+
+  if (paramsQuery.ingredients) {
+    const selectedValues = paramsQuery.ingredients.split(",");
+    selectedIngredients.value = new Set(selectedValues);
+
+    ingredientsList.value.forEach((item) => {
+      item.checked = selectedIngredients.value.has(item.value);
+    });
+  }
+});
 </script>

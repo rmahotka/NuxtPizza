@@ -7,7 +7,6 @@ export interface ItemPizzaProps {
 
 export interface IProductsPizzaProps {
   title: string;
-  items: any[];
+  items: ItemPizzaProps[];
   categoriId: number;
-
 }

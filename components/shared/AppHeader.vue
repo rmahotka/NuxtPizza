@@ -13,6 +13,11 @@
           <p class="text-md leading-3 text-gray-400">вкусней уже некуда</p>
         </div>
       </NuxtLink>
+
+      <div class="mx-10 flex-1">
+        <SearchInput />
+      </div>
+
       <div class="flex items-center gap-4">
         <Button variant="outline" class="flex items-center gap-1">
           <User :size="16" />

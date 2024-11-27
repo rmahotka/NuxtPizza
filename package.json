@@ -9,20 +9,31 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "tsx prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.5.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@pinia/nuxt": "^0.5.3",
     "@prisma/nuxt": "^0.0.35",
+    "@types/bcrypt": "^5.0.2",
+    "@types/qs": "^6.9.17",
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.418.0",
     "nuxt": "^3.12.4",
     "pinia": "^2.2.1",
+    "qs": "^6.13.1",
     "radix-vue": "^1.9.2",
     "shadcn-nuxt": "^0.10.4",
     "tailwind-merge": "^2.4.0",
@@ -32,12 +43,15 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.1",
-    "@prisma/client": "^5.18.0",
+    "@prisma/client": "^5.22.0",
+    "@types/node": "^22.9.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "typescript": "^5.5.4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
     "vue-tsc": "^1.8.27"
   }
 }

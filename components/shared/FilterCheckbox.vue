@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import type { FilterCheckboxProps } from "~/types/typeCheckbox";
+import type { FilterCheckboxProps } from "~/types/typeFilters";
 
 const props = defineProps<FilterCheckboxProps>();
 
