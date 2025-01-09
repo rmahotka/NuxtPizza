@@ -1,7 +1,7 @@
 <template>
   <div class="inline-flex gap-1 rounded-2xl bg-gray-50 p-1">
     <a
-      v-for="{ name, id } in categories"
+      v-for="{ name, id } in categoriesFilter"
       :key="id"
       :href="`/#${name}`"
       :class="[
@@ -13,28 +13,20 @@
       ]"
       @click="onActiveIndex(id)"
     >
-      <button>
-        {{ name }}
-      </button>
+      <button>{{ name }}</button>
     </a>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Category } from "@prisma/client";
 import { useCategory } from "~/stores/category";
 
-const category = useCategory();
-type CategoryType = { id: number; name: string };
+defineProps<{
+  categoriesFilter: Category[];
+}>();
 
-const categories: CategoryType[] = [
-  { id: 1, name: "Пиццы" },
-  { id: 2, name: "Комбо" },
-  { id: 3, name: "Закуски" },
-  { id: 4, name: "Коктейли" },
-  { id: 5, name: "Кофе" },
-  { id: 6, name: "Напитки" },
-  { id: 7, name: "Десерты" },
-];
+const category = useCategory();
 
 const activeIndex = ref(0);
 

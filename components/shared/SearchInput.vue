@@ -5,8 +5,8 @@
       class="fixed bottom-0 left-0 right-0 top-0 z-30 bg-black/50"
     />
     <div
-      class="relative z-30 flex h-11 flex-1 justify-between rounded-2xl"
       ref="target"
+      class="relative z-30 flex h-11 flex-1 justify-between rounded-2xl"
     >
       <Search
         class="absolute left-3 top-1/2 h-5 translate-y-[-50%] text-gray-400"
@@ -17,7 +17,7 @@
         class="w-full rounded-2xl bg-gray-100 pl-11 outline-1"
         placeholder="Найти пиццу..."
         @focus="focuse = true"
-      />
+      >
 
       <div
         v-if="productsItem.length"
@@ -30,15 +30,15 @@
         <NuxtLink
           v-for="item in productsItem"
           :key="item.id"
-          @click="onClickItem"
           :to="`/product/${item.id}`"
           class="flex items-center gap-2 rounded-xl px-3 py-2 transition-all hover:bg-primary/10"
+          @click="onClickItem"
         >
           <img
             class="h-8 w-8 rounded-sm"
             :src="item.imageUrl"
             :alt="item.name"
-          />
+          >
           <span>{{ item.name }}</span>
         </NuxtLink>
       </div>
@@ -50,7 +50,6 @@
 import type { Product } from "@prisma/client";
 import { onClickOutside, refDebounced } from "@vueuse/core";
 import { Search } from "lucide-vue-next";
-import { Api } from "~/services/api-client";
 
 const focuse = ref<boolean>(false);
 const target = ref(null);
@@ -68,8 +67,15 @@ const onClickItem = () => {
 
 watch(debonce, async () => {
   try {
-    const response = Api.products.searchProducts(searchQuery.value);
-    productsItem.value = await response;
+    const response = await $fetch("/api/products/search", {
+      params: { query: searchQuery.value },
+    });
+
+    productsItem.value = response.map((product) => ({
+      ...product,
+      createdAt: new Date(product.createdAt),
+      updatedAt: new Date(product.updatedAt),
+    }));
   } catch (err) {
     console.error(err);
   }

@@ -6,7 +6,7 @@
 
     <div class="sticky top-0 z-10 bg-white py-5 shadow-lg shadow-black/5">
       <app-container class="flex items-center justify-between">
-        <categories />
+        <app-categories :categories-filter="products"/>
         <sort-popup />
       </app-container>
     </div>
@@ -18,88 +18,14 @@
         </div>
         <div class="flex-1">
           <div class="flex flex-col gap-16">
-            <products-list-card
-              title="Пиццы"
-              :categori-id="1"
-              :items="[
-                {
-                  id: 1,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 2,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 3,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 4,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 5,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-              ]"
-            />
-            <products-list-card
-              title="Комбо"
-              :categori-id="2"
-              :items="[
-                {
-                  id: 1,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 2,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 3,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 4,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-                {
-                  id: 5,
-                  name: 'Чизбургер-пицца',
-                  imageUrl: '',
-                  price: 550,
-                  items: [{ price: 550 }],
-                },
-              ]"
-            />
+            <template v-for="item in products" :key="item.id">
+              <products-list-card
+                v-if="item"
+                :title="item.name"
+                :categori-id="item.id"
+                :items="item.products"
+              />
+            </template>
           </div>
         </div>
       </div>
@@ -107,10 +33,19 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { Product } from "@prisma/client";
+
 useHead({
   title: "NuxtPizza | Главная",
 });
+
+const products = ref<Product[]>();
+
+const { data } = await useFetch<Product[]>('/api/categories')
+products.value = data.value
+
+
 </script>
 
 <style scoped></style>

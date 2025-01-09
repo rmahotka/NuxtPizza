@@ -8,8 +8,8 @@
         class="mb-4 h-6 rounded-[8px]"
       />
       <skeleton
-        class="mb-4 h-6 w-28 rounded-[8px]"
         v-if="items.length > limit"
+        class="mb-4 h-6 w-28 rounded-[8px]"
       />
     </div>
     <div v-else>

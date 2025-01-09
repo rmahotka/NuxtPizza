@@ -57,13 +57,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Ingredients } from "@prisma/client";
 import type {
   FilterCheckboxProps,
   TangeProps,
   SearchParams,
 } from "~/types/typeFilters";
-import { Api } from "~/services/api-client";
 import { useUrlSearchParams } from "@vueuse/core";
 import qs from "qs";
 
@@ -145,15 +143,20 @@ watch(
 const getIngredients = async () => {
   try {
     loadingItem.value = true;
-    const response = await Api.ingredients.gelAll();
-    ingredientsList.value = response.map((ingredient: Ingredients) => ({
-      value: String(ingredient.id),
-      text: ingredient.name,
-    }));
+    const data = await $fetch("/api/ingredients");
+
+    if (data) {
+      ingredientsList.value = data.map((ingredient) => ({
+        value: String(ingredient.id),
+        text: ingredient.name,
+      }));
+    } else {
+      console.warn("No ingredients found");
+      ingredientsList.value = [];
+    }
   } catch (e) {
     console.error(e);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 200));
     loadingItem.value = false;
   }
 };

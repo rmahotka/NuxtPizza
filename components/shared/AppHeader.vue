@@ -7,7 +7,7 @@
           alt="Logo"
           width="35px"
           height="35px"
-        />
+        >
         <div>
           <h1 class="text-2xl font-black uppercase">NUXT PIZZA</h1>
           <p class="text-md leading-3 text-gray-400">вкусней уже некуда</p>

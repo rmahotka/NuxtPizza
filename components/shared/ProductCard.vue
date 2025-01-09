@@ -6,7 +6,7 @@
           :src="props.imageUrl"
           :alt="props.name"
           class="h-[215px] w-[215px]"
-        />
+        >
       </div>
 
       <div>
