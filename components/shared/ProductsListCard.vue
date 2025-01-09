@@ -1,11 +1,13 @@
 <template>
-  <div :id="props.title" ref="target">
-    <app-title class="mb-5 font-extrabold" size="lg">
-      {{ props.title }}
-    </app-title>
+  <div :id="title" ref="target">
+    <app-title
+      :text="title"
+      size="lg"
+      class="mb-5 font-extrabold"
+    />
     <div class="grid grid-cols-3 gap-[50px]">
       <product-card
-        v-for="item in props.items"
+        v-for="item in items"
         :id="item.id"
         :key="item.id"
         :name="item.name"

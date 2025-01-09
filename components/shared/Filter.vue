@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-title class="mb-5 font-bold"> Фильтрация </app-title>
+    <app-title text="Фильтрация" class="mb-5 font-bold" />
 
     <checkbox-filter-group
       class="mt-6 border-b border-y-neutral-100 pb-5"

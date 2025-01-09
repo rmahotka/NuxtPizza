@@ -10,9 +10,11 @@
       </div>
 
       <div>
-        <app-title size="sm" class="mb-1 mt-3 font-bold">
-          {{ props.name }}
-        </app-title>
+        <app-title
+          :text="name"
+          size="sm"
+          class="mb-1 mt-3 font-bold"
+        />
       </div>
 
       <p class="text-sm text-gray-400">
@@ -21,7 +23,7 @@
 
       <div class="mt-4 flex items-center justify-between">
         <span class="text-[20px]">
-          от <b>{{ props.price }}</b>
+          от <b>{{ price }}</b>
         </span>
 
         <Button variant="secondary" class="text-base font-bold">

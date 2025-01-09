@@ -1,7 +1,10 @@
 <template>
   <section>
     <app-container class="mt-10">
-      <app-title size="lg" class="font-extrabold"> Все пиццы </app-title>
+      <app-title
+        text="Все пиццы "
+        size="lg" class="font-extrabold"
+      />
     </app-container>
 
     <div class="sticky top-0 z-10 bg-white py-5 shadow-lg shadow-black/5">

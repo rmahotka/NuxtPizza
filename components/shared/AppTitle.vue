@@ -1,7 +1,7 @@
 <template>
   <div>
     <component :is="tag" :class="[classSize]">
-      <slot>Text</slot>
+      {{text}}
     </component>
   </div>
 </template>
@@ -11,10 +11,12 @@ type TitleSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
 interface Props {
   size?: TitleSize;
+  text?: ''
 }
 
 const props = withDefaults(defineProps<Props>(), {
   size: "sm",
+  text: ''
 });
 
 const mapTagBySize = {
